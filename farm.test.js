@@ -16,19 +16,19 @@ const {
     });
   });
   
-  // describe("get_yield_for_crop", () => {
-  //   test("Get yield for crop, simple", () => {
-  //     const corn = {
-  //       name: "corn",
-  //       yield: 3,
-  //     };
-  //     const input = {
-  //       crop: corn,
-  //       num_crops: 10,
-  //     };
-  //     expect(get_yield_for_crop(input)).toBe(30);
-  //   });
-  // });
+  describe("get_yield_for_crop", () => {
+    test("Get yield for crop, simple", () => {
+      const corn = {
+        name: "corn",
+        yield: 3,
+      };
+      const input = {
+        crop: corn,
+        num_crops: 10,
+      };
+      expect(get_yield_for_crop(input)).toBe(30);
+    });
+  });
   
   // describe("get_total_yield", () => {
   //   test("Calculate total yield with multiple crops", () => {
