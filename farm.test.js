@@ -59,41 +59,16 @@ describe("get_total_yield", () => {
 });
 
 describe("getCostsForCrop", () => {
-  test("Calculate total yield with multiple crops", () => {
+  test("Get yield for crop, simple", () => {
     const corn = {
       name: "corn",
       yield: 3,
       cost: 2,
     };
-    const pumpkin = {
-      name: "pumpkin",
-      yield: 4,
-      cost: 3
+    const input = {
+      crop: corn,
+      num_crops: 10,
     };
-    const crops = [
-      { crop: corn, num_crops: 5 },
-      { crop: pumpkin, num_crops: 2 },
-    ];
-    expect(getCostsForCrop({ crops })).toBe(16);
-  });
-});
-
-describe("getCostsForCrop", () => {
-  test("Calculate total yield with multiple crops", () => {
-    const corn = {
-      name: "corn",
-      yield: 3,
-      cost: 4,
-    };
-    const pumpkin = {
-      name: "pumpkin",
-      yield: 4,
-      cost: 4
-    };
-    const crops = [
-      { crop: corn, num_crops: 5 },
-      { crop: pumpkin, num_crops: 2 },
-    ];
-    expect(getCostsForCrop({ crops })).toBe(28);
+    expect(getCostsForCrop(input)).toBe(20);
   });
 });

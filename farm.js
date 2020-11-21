@@ -20,10 +20,7 @@ const get_total_yield = (input) => {
 
 const getCostsForCrop = (input) => {
     let costs = 0;
-    input.crops.forEach(crop => {
-        costs += (crop.crop.cost * crop.num_crops)
-    })
-    return costs
+    return (input.crop.cost * input.num_crops)
 }
 
 module.exports = {
