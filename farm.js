@@ -5,8 +5,7 @@ const get_yield_for_plant = (plant) => {
 
 //calculate yield * number of crops
 const get_yield_for_crop = (input) => {
-    const crop = input.crop
-    return (get_yield_for_plant(crop) * input.num_crops);
+    return (get_yield_for_plant(input.crop) * input.num_crops);
 }
 
 //calculate total yield from array of crops
@@ -18,14 +17,20 @@ const get_total_yield = (input) => {
     return total_yield
 }
 
+//calculating the cost for one crop
 const getCostsForCrop = (input) => {
-    let costs = 0;
-    return (input.crop.cost * input.num_crops)
+    return input.crop.cost * input.num_crops
 }
 
+//calculating revenue for one crop
+const getRevenueForCrop = (input) => {
+    return get_yield_for_crop(input) * input.crop.salePrice
+    //get_yield_for_crop(input) * 
+}
 module.exports = {
     get_yield_for_plant,
     get_yield_for_crop,
     get_total_yield,
     getCostsForCrop,
+    getRevenueForCrop,
 }
