@@ -7,17 +7,17 @@ const get_yield_for_crop = (input) => {
     return (get_yield_for_plant(crop) * input.num_crops);
 }
 
-// const get_total_yield = (crops) => {
-//         total_yield = [];
-//         crops.forEach(crop => {
-//             crop_type = crop.crop;
-//             crop_yield = crops.crop.yield;
-//         })
-    
-// }
+const get_total_yield = (input) => {
+    let total_yield = 0;
+    input.crops.forEach(crop => {
+        total_yield += get_yield_for_crop(crop)
+    })
+    return total_yield
+}
+
 
 module.exports = {
     get_yield_for_plant,
     get_yield_for_crop,
-    // get_total_yield,
+    get_total_yield,
 }
