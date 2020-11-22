@@ -1,6 +1,14 @@
-//calculate yield from plant
-const get_yield_for_plant = (plant) => {
-    return plant.yield
+//calculate yield from plant, considering environment factors
+const get_yield_for_plant = (plant, environmentFactors) => {
+    let impact = 0;
+    for (const factor in environmentFactors) {
+        for (const risk in plant.factors) {
+            if (factor == risk) {
+                impact += plant.factors[risk][environmentFactors[factor]]
+            }
+        }
+    }
+    return ((plant.yield / 100) * (impact += 100))
 }
 
 //calculate yield * number of crops
