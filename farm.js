@@ -1,49 +1,62 @@
-//calculate yield from plant, considering environment factors
-const get_yield_for_plant = (plant, environmentFactors) => {
-    let impact = 0;
-    for (const factor in environmentFactors) {
-        for (const risk in plant.factors) {
-            if (factor == risk) {
-                impact += plant.factors[risk][environmentFactors[factor]]
-            }
+//get yield for plant with environment factors
+const getYieldForPlant = (plant, environmentFactors) => {
+    
+    let factors = []
+    if(environmentFactors) {
+    for (const efactor in environmentFactors) {
+        for (const pfactor in plant.factors) {
+            if (efactor == pfactor) {
+                factors.push((plant.factors[pfactor][environmentFactors[efactor]]+100)/100)
+                }
+            }   
         }
+        
+        return factors.reduce((prev, next) => prev * next, plant.yield)    
+    
+}
+    else {
+        return plant.yield
     }
-    return ((plant.yield / 100) * (impact += 100))
 }
 
-//calculate yield * number of crops
-const get_yield_for_crop = (input) => {
-    return (get_yield_for_plant(input.crop) * input.num_crops);
+//get yield for 1 crop
+const getYieldForCrop = (crops, environmentFactors) => {
+    console.log(crops)
+    return getYieldForPlant(crops.crop, environmentFactors) * crops.numCrops
+
 }
 
-//calculate total yield from array of crops
-const get_total_yield = (input) => {
-    let total_yield = 0;
-    input.crops.forEach(crop => {
-        total_yield += get_yield_for_crop(crop)
-    })
-    return total_yield
+//get yield of multiple crops
+const getTotalYield = (crops, environmentFactors) => { 
+    const totalYield = []
+    crops.crops.map(crop => {
+        totalYield.push(getYieldForCrop(crop, environmentFactors))
+    });
+    return totalYield.reduce((prev, next) => prev + next, 0)
 }
 
-//calculating the cost for one crop
-const getCostsForCrop = (input) => {
-    return input.crop.cost * input.num_crops
+//get costs for 1 crop
+const getCostsForCrop = (crops) => {
+    return crops.crop.cost * crops.numCrops
 }
 
-//calculating revenue for one crop
-const getRevenueForCrop = (input) => {
-    return get_yield_for_crop(input) * input.crop.salePrice
+//get revenue for 1 crop
+const getRevenueForCrop = (crops, environmentFactors) => {
+    return crops.crop.saleprice * getYieldForCrop(crops, environmentFactors)
 }
 
-//calculating profit for one crop
-const getProfitForCrop = (input) => {
-    return getRevenueForCrop(input) - getCostsForCrop(input)
+//get profit for 1 crop
+const getProfitForCrop =(crops, environmentFactors) => {
+    return getRevenueForCrop(crops, environmentFactors) - getCostsForCrop(crops)
 }
+
 module.exports = {
-    get_yield_for_plant,
-    get_yield_for_crop,
-    get_total_yield,
+    getYieldForPlant,
+    getYieldForCrop,
+    getTotalYield,
     getCostsForCrop,
     getRevenueForCrop,
     getProfitForCrop,
 }
+
+//npm run test -- --watch
